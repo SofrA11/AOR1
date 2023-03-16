@@ -3,13 +3,13 @@
 .data
 x dw 38
 y dw 2
-z dw 3
+z dw 4
 .code
 main proc
 pocetak:
 mov bx,y
 dec bx
-mov ax,x
+movzx eax,x
 mul bx
 add ax,10
 
@@ -26,11 +26,15 @@ mul dx
 
 mov bx,ax
 mov ax,cx
-div bx
+and cx,8000h
+sar cx,15
+mov dx,cx
+idiv bx
 mov x,ax
 
+mov eax,0
 mov ax,y
-shr ax,1
+sar ax,1
 inc ax
 mov y,ax
 
@@ -43,6 +47,6 @@ uslov2:
 cmp bx,1
 ja pocetak
 kraj:
-
+ret
 main endp
 end main
